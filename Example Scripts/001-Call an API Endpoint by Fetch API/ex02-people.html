@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSON-Read Local File Test</title>
+</head>
+<body>
+    <div id="myData"></div>
+    <script>
+        fetch('./people.json')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+        function appendData(data) {
+            var mainContainer = document.getElementById("myData");
+            for (var i = 0; i < data.length; i++) {
+                var div = document.createElement("div");
+                div.innerHTML = 'Name: ' + data[i].firstName + ' ' + data[i].lastName;
+                mainContainer.appendChild(div);
+            }
+        }
+    </script>
+    <p>
+    <i>
+    /*<br>
+     * <B>NOTE:</B><br>
+     * Browser causes a CORS ERROR which returns the error message below:<br>
+     * "Access to fetch at ... from origin 'null' <br>
+     * has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, chrome-untrusted, https."<br>
+     *<br>
+     *  Not to get this error I had to open the browser by disabling web security by the command below:<br>
+     *  open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security<br>
+     */        
+    </i>    
+</body>
+</html>

@@ -1,1 +1,1 @@
-
+Includes JavaScript example scripts.

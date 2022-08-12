@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ip-api.com API Call-</title>
+</head>
+<body>
+    <p>
+    <div id="myData"></div>
+    <script>
+        const IpAppJsonElements = ["country", "city", "countryCode","lat","lon","regionName","timezone","zip","status"];
+
+        function appendData(data1) {
+            var mainContainer = document.getElementById("myData");
+            <!--alert(3);-->
+            <!--alert(data1.length);-->
+            for (var i = 0; i < IpAppJsonElements.length; i++) {
+                var div = document.createElement("div");
+                var nextJsonDataFieldValue;
+                switch(i){
+                    case 0: nextJsonDataFieldValue = data1.country; break;
+                    case 1: nextJsonDataFieldValue = data1.city; break;
+                    case 2: nextJsonDataFieldValue = data1.countryCode; break;
+                    case 3: nextJsonDataFieldValue = data1.lat; break;
+                    case 4: nextJsonDataFieldValue = data1.lon; break;
+                    case 5: nextJsonDataFieldValue = data1.regionName; break;
+                    case 6: nextJsonDataFieldValue = data1.timezone; break;
+                    case 7: nextJsonDataFieldValue = data1.zip; break;
+                    case 8: nextJsonDataFieldValue = data1.status; break;
+                }
+                div.innerHTML = "<B>" + IpAppJsonElements[i] + "</B>"+ ":" + nextJsonDataFieldValue;
+                mainContainer.appendChild(div);
+            }
+        }
+
+        fetch('http://ip-api.com/json')
+        .then(function (response) {
+            <!--alert(1);-->
+            return response.json();
+        })
+        .then(function (data) {
+            <!--alert("2");-->
+            appendData(data);
+        })
+        .catch(function (err) {
+            console.log('error: ' + err);
+        });
+
+    </script>
+</body>
+</html>
